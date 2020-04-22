@@ -40,7 +40,7 @@ class AdminPageScreen extends Component {
   }
 
   deleteUser(id) {
-    fetch("http://192.168.1.102:3000/deleteUser", {
+    fetch("http://192.168.1.106:3000/deleteUser", {
       method: "POST",
       headers: {
         Accept: "application/json",

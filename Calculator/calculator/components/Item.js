@@ -23,7 +23,7 @@ class Item extends Component {
           alignItems: "center"
         }}
       >
-        <Text style={{ color: "white", fontSize: '4vw' }}>
+        <Text style={{ color: "white", fontSize: 30 }}>
           {this.props.option}
         </Text>
       </TouchableOpacity>

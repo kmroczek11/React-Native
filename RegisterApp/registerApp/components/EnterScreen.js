@@ -4,44 +4,44 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import MyButton from "./MyButton";
 
 class EnterScreen extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       login: "",
-      password: ""
+      password: "",
     };
     this.registerUser = this.registerUser.bind(this);
   }
 
   registerUser() {
-    fetch("http://192.168.1.102:3000", {
+    fetch("http://192.168.1.106:3000", {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         login: this.state.login,
-        password: this.state.password
-      })
+        password: this.state.password,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         if (response.status === 200) {
           return response.json();
         } else {
           throw new Error("Something went wrong on api server!");
         }
       })
-      .then(response => {
+      .then((response) => {
         console.debug(response);
         console.log("Status", response.status);
         switch (response.status) {
@@ -58,11 +58,11 @@ class EnterScreen extends Component {
             break;
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
-  
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
@@ -73,13 +73,14 @@ class EnterScreen extends Component {
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.txtIn}
-            onChangeText={login => this.setState({ login })}
+            onChangeText={(login) => this.setState({ login })}
             value={this.state.login}
           />
           <Text style={styles.label}>Password</Text>
           <TextInput
             style={styles.txtIn}
-            onChangeText={password => this.setState({ password })}
+            secureTextEntry={true}
+            onChangeText={(password) => this.setState({ password })}
             value={this.state.password}
           />
           <MyButton
@@ -97,26 +98,26 @@ class EnterScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000"
+    backgroundColor: "#000000",
   },
   header: {
     flex: 2,
     backgroundColor: "#26a69a",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   hdText: {
     color: "white",
     fontSize: 60,
-    textAlign: "center"
+    textAlign: "center",
   },
   content: {
     flex: 3,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   label: {
     fontSize: 40,
-    margin: 20
+    margin: 20,
   },
   txtIn: {
     fontSize: 40,
@@ -125,16 +126,16 @@ const styles = StyleSheet.create({
     borderBottomColor: "grey",
     marginRight: 20,
     marginLeft: 20,
-    height: 80
+    height: 80,
   },
   button: {
     backgroundColor: "transparent",
     margin: 20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   btTxt: {
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });
 
 export default EnterScreen;
